@@ -10,10 +10,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/typeorm/.git"
+    "url": "https://github.com/tjme/restless.git"
   },
   "bugs": {
-    "url": "https://github.com/typeorm//issues"
+    "url": "https://github.com/tjme/restless/issues"
   },
   "tags": [
     "Restless",
