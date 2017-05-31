@@ -1,0 +1,52 @@
+{
+  "name": "restless",
+  "version": "0.1.0",
+  "description": "REST, but with LESS work! Create a REST API and SQL relational database, simply by declaring it (using TypeScript decorators)",
+  "license": "MIT",
+  "readmeFilename": "README.md",
+  "author": {
+    "name": "Tim Merrison",
+    "email": "tim@merrison.co.uk"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/typeorm/.git"
+  },
+  "bugs": {
+    "url": "https://github.com/typeorm//issues"
+  },
+  "tags": [
+    "Restless",
+    "TypeScript",
+    "REST",
+    "SQL",
+    "PostgreSQL",
+    "SQLServer",
+    "MySQL",
+    "MariaDB",
+    "typeORM",
+    "Koa",
+    "Node",
+    "decorators",
+    "RESTful"
+  ],
+  "devDependencies": {
+    "typescript": "^2.1.5"
+  },
+  "dependencies": {
+    "@types/koa": "^2.0.39",
+    "@types/koa-bodyparser": "^3.0.23",
+    "@types/koa-router": "^7.0.21",
+    "@types/node": "^7.0.4",
+    "body-parser": "^1.17.1",
+    "koa": "^2.2.0",
+    "koa-bodyparser": "^3.2.0",
+    "koa-router": "^7.0.1",
+    "mssql": "^3.3.0",
+    "reflect-metadata": "^0.1.9",
+    "typeorm": "^0.0.9"
+  },
+  "scripts": {
+    "start": "tsc && node dist/index.js"
+  }
+}
