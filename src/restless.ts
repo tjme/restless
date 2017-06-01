@@ -13,7 +13,7 @@ export const enum apiType {
     CRUD = Create | FindAll | FindOneById | Update | Delete
 };
 
-function dflt (value?: any, def?: any) { return (typeof value === "undefined") ? def : value; };
+function dflt (value?: any, def?: any) {return (typeof value === "undefined") ? def : value;};
 
 export function Rest(options?: {prefix?: string, types?: apiType, path?:string, method?: string}) {
     return function (target: Function) {
@@ -48,14 +48,13 @@ export function Rest(options?: {prefix?: string, types?: apiType, path?:string, 
 
         if  (types & apiType.Update) AppRoutes.push({
             path: dflt(options && options.path, prefix+"/:id"),
-            method: options && options.method || "post",
+            method: options && options.method || "put",
             action: async (context: Context) => {
                 const repo = getEntityManager().getRepository(target.name);
                 let record = await repo.preload({id:(context as any).params.id});
                 for (var key in context.request.body) record[key]=context.request.body[key];
-                await repo.persist(record);
                 context.body = record;
-            }});
+                await repo.persist(record);}});
 
         if  (types & apiType.Delete) AppRoutes.push({
             path: dflt(options && options.path, prefix+"/:id"),

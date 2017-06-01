@@ -5,7 +5,7 @@ import {apiType, Rest} from "../restless";
 @Entity()
 export class Category {
 
-    @PrimaryColumn("int", { generated: true })
+    @PrimaryColumn("int", {generated: true})
     id: number;
 
     @Column()

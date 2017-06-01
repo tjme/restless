@@ -20,7 +20,7 @@ It is implemented using [TypeScript](https://www.typescriptlang.org/), [TypeORM]
 4. edit `ormconfig.json` and change your database configuration (you can also change a database type, but don't forget to install specific database drivers)
 5. run `npm start` (or `yarn run start`)
 6. open `http://localhost:3000/post` and you'll see an empty array
-7. use curl, Postman or other tools to send HTTP requests to test your REST API (e.g. POST to the above address, with a JSON body, such as `{"Title":"Test entry","Text":"Some sample text!"}`)
+7. use curl, Postman or other tools to send HTTP requests to test your REST API (e.g. PUT to the above address, with a JSON body, such as `{"title":"Test entry","text":"Some sample text!"}`)
 
 # Configure to meet your needs
 You can simply add or replace the entities (the TypeScript definition files in Src/entity) with your own, and rerun the server. In addtion to providing the new APIs for your entities, the Database (changes) will also be made for you automatically (by TypeORM).
@@ -44,7 +44,7 @@ Rest({types: apiType.Delete, path: "/post/del/:id"})
 
 You can also override the default method for an API, for example to add a modified Update API to the above, add:
 ```
-Rest({types: apiType.Update, method: "PUT"})
+Rest({types: apiType.Update, method: "POST"})
 ```
 
 Of course, you can also mix and match all of the above, and produce multiple REST API endpoints for each entity.

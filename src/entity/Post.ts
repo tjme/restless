@@ -6,7 +6,7 @@ import {Category} from "./Category";
 @Entity()
 export class Post {
 
-    @PrimaryColumn("int", { generated: true })
+    @PrimaryColumn("int", {generated: true})
     id: number;
 
     @Column()
@@ -15,9 +15,7 @@ export class Post {
     @Column("text")
     text: string;
 
-    @ManyToMany(type => Category, {
-        cascadeInsert: true
-    })
+    @ManyToMany(type => Category, {cascadeInsert: true})
     @JoinTable()
     categories: Category[];
 
