@@ -23,6 +23,6 @@ createConnection().then(async connection => {
     app.use(router.allowedMethods());
     app.listen(3000);
 
-    console.log("Koa application is up and running on port 3000");
+    console.log("Restless application is up and running on port 3000");
 
 }).catch(error => console.log("TypeORM connection error: ", error));
