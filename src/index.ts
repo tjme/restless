@@ -1,9 +1,9 @@
 import "reflect-metadata";
 import {createConnection} from "typeorm";
 import * as Koa from "koa";
-import * as Router from "koa-router";
 import * as bodyParser from "koa-bodyparser";
-import {AppRoutes} from "./restless";
+
+import {router} from "./restless";
 
 // create connection with database
 // note that its not active database connection
@@ -12,10 +12,6 @@ createConnection().then(async connection => {
 
     // create koa app
     const app = new Koa();
-    const router = new Router();
-
-    // register all application routes
-    AppRoutes.forEach(route => router[route.method](route.path, route.action));
 
     // run app
     app.use(bodyParser());

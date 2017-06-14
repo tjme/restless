@@ -2,7 +2,7 @@ Restless
 ========
 [![MIT license](http://img.shields.io/badge/license-MIT-lightgrey.svg)](http://opensource.org/licenses/MIT)
 
-Restless is a highly automated way to provide a RESTful back-end/server.
+Restless automates the provision of a RESTful back-end/server, and relational database.
 
 It enables you to create a REST API and SQL relational database, simply by declaring it (using TypeScript decorators).
 
@@ -11,6 +11,7 @@ It is implemented using [TypeScript](https://www.typescriptlang.org/), [TypeORM]
 # Prerequisites
 - Install [Node.js](https://nodejs.org/en/)
 - Install a SQL database server, e.g. [PostgreSQL](https://www.postgresql.org), [Microsoft SQLServer](https://www.microsoft.com/sql-server/sql-server-2016), Oracle, SQLite, MySQL or MariaDB
+- Create an (empty) database
 - Install a good IDE, e.g. [VS Code](https://code.visualstudio.com/)
 
 # Example installation
@@ -25,26 +26,26 @@ It is implemented using [TypeScript](https://www.typescriptlang.org/), [TypeORM]
 # Configure to meet your needs
 You can simply add or replace the entities (the TypeScript definition files in Src/entity) with your own, and rerun the server. In addtion to providing the new APIs for your entities, the Database (changes) will also be made for you automatically (by TypeORM).
 
-You annotate each entity for which you want a REST API with `Rest()`. For a standard interface, no other code (change) is needed.
+You annotate each entity for which you want a REST API with `@Rest()`. For a standard interface, no other code (change) is needed.
 
 By default, the API will support a standard set of CRUD operations (Create, Read, Update and Delete), including Read for both all instances/records, and for a single one (selected by id).
 
-The API for the above "post" entity is /post by default, but can be specified with an optional parameter to the annotation in post.ts, for example: `Rest({prefix: "/posts"})`, or as seen for Categories in the category.ts definition file.
+The API for the above "post" entity is /post by default, but can be specified with an optional parameter to the annotation in post.ts, for example: `@Rest({prefix: "/posts"})`, or as seen for Categories in the category.ts definition file.
 
-You can specify which API types you want for an entity using an optional parameter, for example `Rest({types: apiType.Create || apiType.FindAll})`, which will provide only a Create and Read (All) API. Alternatively, you can add multiple decorators to an entity, as below:
-```
-Rest({types: apiType.Create})
-Rest({types: apiType.FindAll})
+You can specify which API types you want for an entity using an optional parameter, for example `@Rest({types: apiType.Create || apiType.FindAll})`, which will provide only a Create and Read (All) API. Alternatively, you can add multiple decorators to an entity, as below:
+```typescript
+@Rest({types: apiType.Create})
+@Rest({types: apiType.FindAll})
 ```
 
 You can override the default path (instead of specifying just the prefix), for example to add a Delete API to the above, add:
-```
-Rest({types: apiType.Delete, path: "/post/del/:id"})
+```typescript
+@Rest({types: apiType.Delete, path: "/post/del/:id"})
 ```
 
 You can also override the default method for an API, for example to add a modified Update API to the above, add:
-```
-Rest({types: apiType.Update, method: "POST"})
+```typescript
+@Rest({types: apiType.Update, method: "POST"})
 ```
 
 Of course, you can also mix and match all of the above, and produce multiple REST API endpoints for each entity.
