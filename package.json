@@ -31,19 +31,11 @@
     "RESTful"
   ],
   "devDependencies": {
-<<<<<<< HEAD
     "typescript": "^2.3.4",
     "@types/koa": "^2.0.39",
     "@types/koa-bodyparser": "^3.0.23",
     "@types/koa-router": "^7.0.21",
     "@types/node": "^7.0.27"
-=======
-    "typescript": "^2.1.5",
-    "@types/koa": "^2.0.39",
-    "@types/koa-bodyparser": "^3.0.23",
-    "@types/koa-router": "^7.0.21",
-    "@types/node": "^7.0.4"
->>>>>>> 991f1e1ab42c09a93d35ebee9cca983519704bce
   },
   "dependencies": {
     "body-parser": "^1.17.1",
