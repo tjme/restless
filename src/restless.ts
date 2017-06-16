@@ -13,6 +13,42 @@ export const enum apiType {
     CRUD = Create | FindAll | FindOneById | Update | Delete
 };
 
+const CreateMiddleware = (TargetName: string) =>
+    async (context: Context) => {
+        const repo = getEntityManager().getRepository(TargetName);
+        const record = await repo.create(context.request.body);
+        await repo.persist(record);
+        context.body = record;};
+    
+const FindAllMiddleware = (TargetName: string) =>
+    async (context: Context) => {
+        const repo = getEntityManager().getRepository(TargetName);
+        const records = await repo.find();
+        context.body = records;};
+    
+const FindOneByIdMiddleware = (TargetName: string) =>
+    async (context: Context) => {
+        const repo = getEntityManager().getRepository(TargetName);
+        const record = await repo.findOneById((context as any).params.id);
+        if (!record) { context.status = 404; return; }
+        context.body = record;};
+    
+const UpdateMiddleware = (TargetName: string) =>
+    async (context: Context) => {
+        const repo = getEntityManager().getRepository(TargetName);
+        let record = await repo.preload({id:(context as any).params.id});
+        for (var key in context.request.body) record[key]=context.request.body[key];
+        context.body = record;
+        await repo.persist(record);};
+    
+const DeleteMiddleware = (TargetName: string) =>
+    async (context: Context) => {
+        const repo = getEntityManager().getRepository(TargetName);
+        const record = await repo.findOneById((context as any).params.id);
+        if (!record) { context.status = 404; return; }
+        context.body = record;
+        await repo.remove(record);};
+
 function dflt (value?: any, def?: any) {return (typeof value === "undefined") ? def : value;};
 
 export function Rest(options?: {prefix?: string, types?: apiType, path?:string, method?: string}) {
@@ -24,44 +60,18 @@ export function Rest(options?: {prefix?: string, types?: apiType, path?:string, 
         const prefix = dflt(options && options.prefix,"/"+target.name); // Default to /entityname
 
         if  (types & apiType.Create) router[options && options.method || "post"](
-            predflt(prefix),
-            async (context: Context) => {
-                const repo = getEntityManager().getRepository(target.name);
-                const record = await repo.create(context.request.body);
-                await repo.persist(record);
-                context.body = record;});
+            predflt(prefix), CreateMiddleware(target.name));
 
         if  (types & apiType.FindAll) router[options && options.method || "get"](
-            predflt(prefix),
-            async (context: Context) => {
-                const repo = getEntityManager().getRepository(target.name);
-                const records = await repo.find();
-                context.body = records;});
+            predflt(prefix), FindAllMiddleware(target.name));
 
         if  (types & apiType.FindOneById) router[options && options.method || "get"](
-            predflt(prefix, "/:id"),
-            async (context: Context) => {
-                const repo = getEntityManager().getRepository(target.name);
-                const record = await repo.findOneById((context as any).params.id);
-                if (!record) { context.status = 404; return; }
-                context.body = record;});
+            predflt(prefix, "/:id"), FindOneByIdMiddleware(target.name));
 
         if  (types & apiType.Update) router[options && options.method || "put"](
-            predflt(prefix, "/:id"),
-            async (context: Context) => {
-                const repo = getEntityManager().getRepository(target.name);
-                let record = await repo.preload({id:(context as any).params.id});
-                for (var key in context.request.body) record[key]=context.request.body[key];
-                context.body = record;
-                await repo.persist(record);});
+            predflt(prefix, "/:id"), UpdateMiddleware(target.name));
 
         if  (types & apiType.Delete) router[options && options.method || "delete"](
-            predflt(prefix, "/:id"),
-            async (context: Context) => {
-                const repo = getEntityManager().getRepository(target.name);
-                const record = await repo.findOneById((context as any).params.id);
-                if (!record) { context.status = 404; return; }
-                context.body = record;
-                await repo.remove(record);});
+            predflt(prefix, "/:id"), DeleteMiddleware(target.name));
     }
 }
