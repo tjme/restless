@@ -11,7 +11,7 @@
     },
     "autoSchemaSync": true,
     "entities": [
-      "dist/entity/*.js"
+      "dist/models/*.js"
     ],
     "subscribers": [
       "src/subscriber/*.js,"
@@ -20,7 +20,7 @@
       "src/migration/*.js"
     ],
     "cli": {
-      "entitiesDir": "src/entity",
+      "entitiesDir": "src/models",
       "migrationsDir": "src/migration",
       "subscribersDir": "src/subscriber"
     }

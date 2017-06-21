@@ -2,7 +2,10 @@ import "reflect-metadata";
 import {createConnection} from "typeorm";
 import * as Koa from "koa";
 import * as bodyParser from "koa-bodyparser";
+// import * as passport from 'koa-passport';
+// import * as session from 'koa-session';
 
+import exceptionHandler from "./exceptionMiddleware";
 import {router} from "./restless";
 
 // create connection with database
@@ -14,7 +17,10 @@ createConnection().then(async connection => {
     const app = new Koa();
 
     // run app
+    app.use(exceptionHandler);
     app.use(bodyParser());
+    // app.use(passport.initialize());
+    // app.use(passport.session());
     app.use(router.routes());
     app.use(router.allowedMethods());
     app.listen(3000);
