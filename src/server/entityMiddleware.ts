@@ -2,37 +2,37 @@ import {Context} from "koa";
 import {getEntityManager} from "typeorm";
 
 export const Create = (TargetName: string) =>
-    async (context: Context) => {
+    async (ctx: Context) => {
         const repo = getEntityManager().getRepository(TargetName);
-        const record = await repo.create(context.request.body);
+        const record = await repo.create(ctx.request.body);
         await repo.persist(record);
-        context.body = record;};
+        ctx.body = record;};
     
 export const FindAll = (TargetName: string) =>
-    async (context: Context) => {
+    async (ctx: Context) => {
         const repo = getEntityManager().getRepository(TargetName);
         const records = await repo.find();
-        context.body = records;};
+        ctx.body = records;};
     
 export const FindOneById = (TargetName: string) =>
-    async (context: Context) => {
+    async (ctx: Context) => {
         const repo = getEntityManager().getRepository(TargetName);
-        const record = await repo.findOneById((context as any).params.id);
-        if (!record) { context.status = 404; return; }
-        context.body = record;};
+        const record = await repo.findOneById((ctx as any).params.id);
+        if (!record) { ctx.status = 404; return; }
+        ctx.body = record;};
     
 export const Update = (TargetName: string) =>
-    async (context: Context) => {
+    async (ctx: Context) => {
         const repo = getEntityManager().getRepository(TargetName);
-        let record = await repo.preload({id:(context as any).params.id});
-        for (var key in context.request.body) record[key]=context.request.body[key];
-        context.body = record;
+        let record = await repo.preload({id:(ctx as any).params.id});
+        for (var key in ctx.request.body) record[key]=ctx.request.body[key];
+        ctx.body = record;
         await repo.persist(record);};
     
 export const Delete = (TargetName: string) =>
-    async (context: Context) => {
+    async (ctx: Context) => {
         const repo = getEntityManager().getRepository(TargetName);
-        const record = await repo.findOneById((context as any).params.id);
-        if (!record) { context.status = 404; return; }
-        context.body = record;
+        const record = await repo.findOneById((ctx as any).params.id);
+        if (!record) { ctx.status = 404; return; }
+        ctx.body = record;
         await repo.remove(record);};

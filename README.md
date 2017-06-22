@@ -51,11 +51,11 @@ You can also override the default method for an API, for example to add a modifi
 Of course, you can also mix and match all of the above, and produce multiple REST API endpoints for each entity.
 
 # Rationale and future
-By providing a simple mechanism to declaratively define a REST API, it is hoped that Restless can lower the bar to the rapid provision of a basic back-end, as well as providing a separation of responsibility (even where facilities and code need to be provided elsewhere). The vast majority of supporting facilities are provided by exploitation of powerful underpinning technologies, including TypeORM, Koa and Node, in addition to the power of a relational database, and only a very thin layer of functionality is provided by Restless itself.
+By providing a simple mechanism to declaratively define a REST API, it is hoped that Restless can lower the bar to the rapid provision of a basic back-end, as well as providing a separation of responsibility (between configuring the API for each entity, avoiding some or all coding by reusing standard middleware). The vast majority of supporting facilities are provided by exploitation of powerful underpinning technologies, including TypeORM, Koa and Node, in addition to the power of a relational database, and only a very thin layer of functionality is provided by Restless itself.
 
-This initial version is presented in the form of an example (a direct re-implementation of [typescript-koa-example](https://github.com/typeorm/typescript-koa-example)), and in many ways is simply a logical extension of the declarative approach supported by TypeORM.
+The initial version little more than a direct re-implementation of [typescript-koa-example](https://github.com/typeorm/typescript-koa-example), but for relational databases. It now also borrows from [Building and Securing Koa and Angular2 with JWT](https://auth0.com/blog/building-and-securing-a-koa-and-angular2-app-with-jwt). In many ways, it is a logical extension of the declarative approach supported by TypeORM.
 
-As this is only an initial version, there are many potential requirements that it does not currently address (including authentication and access control). Indeed, it also lacks extensibility (especially in terms of controllers), which would currently require code changes (in the main restless.ts file). However, Restless is under active development to address these shortcomings.
+As this is only an initial version, there are many potential requirements not currently addressed (including authentication and access control). Indeed, it also lacks extensibility (especially in terms of controllers), which would currently require code changes (in the main restless.ts file). However, Restless is under active development to address these shortcomings.
 
 Any feedback on Restless would be gratefully recieved.
 
