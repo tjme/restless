@@ -1,17 +1,22 @@
 import {Context} from "koa";
-import {Entity, PrimaryColumn, Column, CreateDateColumn, UpdateDateColumn, ManyToOne, getEntityManager} from "typeorm";
+import {Entity, PrimaryColumn, Column, CreateDateColumn, UpdateDateColumn, ManyToOne, Connection, getConnection} from "typeorm";
 import {apiType, privilegeType, Rest} from "../server/restless";
 import {Contact} from "./Contact";
     
 const FindOneByEmail = (TargetName: string) =>
     async (ctx: Context) => {
-        const repo = getEntityManager().getRepository(TargetName);
-        const record = await repo.findOneById((ctx as any).params.id);
+        const conn = await getConnection();
+        const record = await conn
+            .getRepository(TargetName)
+            .createQueryBuilder(TargetName)
+            .where("email = :email")
+            .setParameter("email", (ctx as any).params.email)
+            .getOne();
         if (!record) { ctx.status = 404; return; }
         ctx.body = record;};
-
+    
 @Rest()
-@Rest({types: apiType.Custom, path: "/user/email/:id", method: "get", middleware: FindOneByEmail})
+@Rest({types: apiType.Custom, path: "/user/email/:email", method: "get", middleware: FindOneByEmail})
 @Entity()
 export class User {
 
@@ -33,7 +38,7 @@ export class User {
     @Column("int", {nullable: true})
     privileges: number;
 
-    @ManyToOne(type => Contact, {cascadeInsert: true})
-    contactId: number;
+    // @ManyToOne(type => Contact, {cascadeInsert: true})
+    // contactId: number;
 
 }
