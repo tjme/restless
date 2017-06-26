@@ -9,7 +9,7 @@
       "password": "test",
       "database": "test"
     },
-    "autoSchemaSync": true,
+    "autoSchemaSync": false,
     "entities": [
       "dist/models/*.js"
     ],

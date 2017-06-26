@@ -6,12 +6,12 @@ import {Create, FindAll, FindOneById, Update, Delete} from "./entityMiddleware";
 export const router = new Router();
 
 export const enum apiType {
-    Create =         1 << 0,
-    FindAll =        1 << 1,
-    FindOneById =    1 << 2,
-    Update =         1 << 3,
-    Delete =         1 << 4,
-    Custom =         1 << 5,
+    Create =        1 << 0,
+    FindAll =       1 << 1,
+    FindOneById =   1 << 2,
+    Update =        1 << 3,
+    Delete =        1 << 4,
+    Custom =        1 << 5,
     CRUD = Create | FindAll | FindOneById | Update | Delete
 };
 

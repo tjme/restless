@@ -5,6 +5,7 @@ import {Contact} from "./Contact";
     
 const FindOneByEmail = (TargetName: string) =>
     async (ctx: Context) => {
+        console.log("FindOneByEmail called with email="+ctx.params.email+", body="+JSON.stringify(ctx.request.body));
         const conn = await getConnection();
         const record = await conn
             .getRepository(TargetName)
