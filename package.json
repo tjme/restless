@@ -48,7 +48,7 @@
     "koa-session": "^5.1.0",
     "mssql": "^4.0.0",
     "reflect-metadata": "^0.1.9",
-    "typeorm": "^0.1.0-alpha.19"
+    "typeorm": "^0.1.0-alpha.21"
   },
   "scripts": {
     "start": "tsc && node dist/server/index.js"

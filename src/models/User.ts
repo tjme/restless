@@ -1,5 +1,5 @@
 import {Context} from "koa";
-import {Entity, PrimaryColumn, Column, CreateDateColumn, UpdateDateColumn, ManyToOne, Connection, getConnection} from "typeorm";
+import {Entity, PrimaryColumn, Column, CreateDateColumn, UpdateDateColumn, ManyToOne, getConnection} from "typeorm";
 import {apiType, privilegeType, Rest} from "../server/restless";
 import {Contact} from "./Contact";
     
