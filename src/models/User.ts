@@ -10,7 +10,7 @@ const FindOneByEmail = (target: Function) =>
             .getRepository(target.name)
             .createQueryBuilder(target.name)
             .where("email = :email")
-            .setParameter("email", (ctx as any).params.email)
+            .setParameter("email", ctx.params.email)
             .getOne();
         if (!record) { ctx.status = 404; return; }
         ctx.body = record;};
@@ -38,7 +38,7 @@ export class User {
     @Column("int", {nullable: true})
     privileges: number;
 
-    @ManyToOne(type => Contact, {cascadeInsert: true})
-    contact: number;
+    @ManyToOne(type => Contact, {cascadeAll: true})
+    contact: Contact;
 
 }

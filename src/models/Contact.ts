@@ -18,7 +18,7 @@ export class Contact {
     @UpdateDateColumn({nullable: true})
     updated: Date;
 
-    @OneToMany(type => User, "id", {cascadeInsert: true})
+    @OneToMany(type => User, "id", {cascadeInsert: true, cascadeUpdate: true})
     users: User;
 
 }

@@ -18,6 +18,7 @@ export const FindAll = (target: Function) =>
         const records = await conn
             .getRepository(target.name)
             .createQueryBuilder(target.name)
+            .where((typeof ctx.query["filter"]==="undefined") ? "" : ctx.query["filter"])
             .getMany()
         ctx.body = records
     };
@@ -28,7 +29,7 @@ export const FindOneById = (target: Function) =>
         const record = await conn
             .getRepository(target.name)
             .createQueryBuilder(target.name)
-            .where("id = :id", { id: (ctx as any).params.id })
+            .where("id = :id", { id: ctx.params.id })
             .getOne()
         if (!record) { ctx.status = 404; return; }
         ctx.body = record
@@ -42,7 +43,7 @@ export const Update = (target: Function) =>
             .createQueryBuilder(target.name)
             .update()
             .set(ctx.request.body)
-            .where("id = :id", { id: (ctx as any).params.id })
+            .where("id = :id", { id: ctx.params.id })
             .execute()
     };
     
@@ -52,7 +53,7 @@ export const Delete = (target: Function) =>
         const record = await conn
             .getRepository(target.name)
             .createQueryBuilder(target.name)
-            .where("id = :id", { id: (ctx as any).params.id })
+            .where("id = :id", { id: ctx.params.id })
             .delete()
             .execute()
     };

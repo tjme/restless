@@ -1,6 +1,6 @@
 {
   "name": "restless",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "REST, but with LESS work! Create a REST API and SQL relational database, simply by declaring it (using TypeScript decorators)",
   "license": "MIT",
   "readmeFilename": "README.md",
