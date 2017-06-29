@@ -26,7 +26,7 @@ export const enum privilegeType {
 // router.post("/SignUp", SignUp());
 // router.post("/SignIn", SignIn());
 
-export function Rest(options?: {prefix?: string, types?: apiType, path?:string, method?: string, privileges?: privilegeType, middleware?: (TargetName: string) => (ctx: Context) => Promise<void>}) {
+export function Rest(options?: {prefix?: string, types?: apiType, path?:string, method?: string, privileges?: privilegeType, middleware?: (target: Function) => (ctx: Context) => Promise<void>}) {
 
     function dflt (value?: any, def?: any) {return (typeof value === "undefined") ? def : value;};
 
@@ -40,21 +40,21 @@ export function Rest(options?: {prefix?: string, types?: apiType, path?:string, 
         //     router.post(predflt(prefix), SecuredRoutes(options.privileges));
 
         if (types & apiType.Create)
-            router[options && options.method || "post"](predflt(prefix), Create(target.name));
+            router[options && options.method || "post"](predflt(prefix), Create(target));
 
         if (types & apiType.FindAll)
-            router[options && options.method || "get"](predflt(prefix), FindAll(target.name));
+            router[options && options.method || "get"](predflt(prefix), FindAll(target));
 
         if (types & apiType.FindOneById)
-            router[options && options.method || "get"](predflt(prefix, "/:id"), FindOneById(target.name));
+            router[options && options.method || "get"](predflt(prefix, "/:id"), FindOneById(target));
 
         if (types & apiType.Update)
-            router[options && options.method || "put"](predflt(prefix, "/:id"), Update(target.name));
+            router[options && options.method || "put"](predflt(prefix, "/:id"), Update(target));
 
         if (types & apiType.Delete)
-            router[options && options.method || "delete"](predflt(prefix, "/:id"), Delete(target.name));
+            router[options && options.method || "delete"](predflt(prefix, "/:id"), Delete(target));
 
         if (types & apiType.Custom)
-            router[options && options.method || "get"](predflt(prefix), options.middleware(target.name));
+            router[options && options.method || "get"](predflt(prefix), options.middleware(target));
     }
 }
