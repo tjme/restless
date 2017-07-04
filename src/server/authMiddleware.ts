@@ -1,7 +1,7 @@
 import {Context} from "koa";
 import {Exception} from '../models/exception';
+import {getConnection} from "typeorm";
 import {sign, verify} from "jsonwebtoken";
-import {getEntityManager} from "typeorm";
 import {privilegeType} from "./restless";
 
 const SUPER_SECRET = 'change-this';

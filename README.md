@@ -1,4 +1,5 @@
 Restless
+<sup>[![Version Badge](http://versionbadg.es//tjme/restless.svg)](https://npmjs.org/tjme/restless)</sup>
 ========
 [![MIT license](http://img.shields.io/badge/license-MIT-lightgrey.svg)](http://opensource.org/licenses/MIT)
 
@@ -12,7 +13,7 @@ It is implemented using [TypeScript](https://www.typescriptlang.org/), [TypeORM]
 - Install [Node.js](https://nodejs.org/en/)
 - Install a SQL database server, e.g. [PostgreSQL](https://www.postgresql.org), [Microsoft SQLServer](https://www.microsoft.com/sql-server/sql-server-2016), Oracle, SQLite, MySQL or MariaDB
 - Create an (empty) database
-- Install a good IDE, e.g. [VS Code](https://code.visualstudio.com/)
+- Optionally install a good IDE with TypeScript, e.g. [VS Code](https://code.visualstudio.com/)
 
 # Example installation
 1. clone repository `git clone https://github.com/tjme/restless.git <project_name>`
@@ -23,7 +24,7 @@ It is implemented using [TypeScript](https://www.typescriptlang.org/), [TypeORM]
 6. open `http://localhost:3000/user` and you'll see an empty array
 7. use curl, Postman or other tools to send HTTP requests to test your REST API (e.g. PUT to the above address, with a JSON body, such as `{"email":"user@test.com"}`)
 
-# Configure to meet your needs
+# Configuration options
 You can simply add or replace the entities (the TypeScript definition files in Src/entity) with your own, and rerun the server. In addtion to providing the new APIs for your entities, the Database (changes) will also be made for you automatically (by TypeORM).
 
 You annotate each entity for which you want a REST API with `@Rest()`. For a standard interface, no other code (change) is needed.
@@ -48,17 +49,19 @@ You can also override the default method for an API, for example to add a modifi
 @Rest({types: apiType.Update, method: "POST"})
 ```
 
-Of course, you can also mix and match all of the above, and produce multiple REST API endpoints for each entity.
+Of course, you can also mix and match all of the above, and produce multiple REST API endpoints for each entity. For example, you can create a secondary set of API endpoints, but selecting by e-mail address rather than user id:
+```typescript
+@Rest({prefix: "/user/email", id: "email"})
+```
 
 # Rationale and future
 By providing a simple mechanism to declaratively define a REST API, it is hoped that Restless can lower the bar to the rapid provision of a basic back-end, as well as providing a separation of responsibility (between configuring the API for each entity, avoiding some or all coding by reusing standard middleware). The vast majority of supporting facilities are provided by exploitation of powerful underpinning technologies, including TypeORM, Koa and Node, in addition to the power of a relational database, and only a very thin layer of functionality is provided by Restless itself.
 
-The initial version little more than a direct re-implementation of [typescript-koa-example](https://github.com/typeorm/typescript-koa-example), but for relational databases. It now also borrows from [Building and Securing Koa and Angular2 with JWT](https://auth0.com/blog/building-and-securing-a-koa-and-angular2-app-with-jwt). In many ways, it is a logical extension of the declarative approach supported by TypeORM.
+The initial version was little more than a direct re-implementation of [typescript-koa-example](https://github.com/typeorm/typescript-koa-example), but for relational databases. It now also borrows from [Building and Securing Koa and Angular2 with JWT](https://auth0.com/blog/building-and-securing-a-koa-and-angular2-app-with-jwt). In many ways, it is a logical extension of the declarative approach supported by TypeORM.
 
 As this is only an initial version, there are many potential requirements not currently addressed (including authentication and access control). Restless is under active development to address these shortcomings.
 
 Any feedback on Restless would be gratefully recieved.
 
 Thanks,
-Tim Merrison
 tim@merrison.co.uk

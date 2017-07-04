@@ -1,5 +1,6 @@
 import {Context} from "koa";
 import {getConnection} from "typeorm";
+import {Exception} from "../models/exception";
 
 export const Create = (target: Function) =>
     async (ctx: Context) => {
@@ -23,19 +24,20 @@ export const FindAll = (target: Function) =>
         ctx.body = records
     };
     
-export const FindOneById = (target: Function) =>
+export const FindOne = (target: Function, id: string="id") =>
     async (ctx: Context) => {
         const conn = await getConnection();
         const record = await conn
             .getRepository(target.name)
             .createQueryBuilder(target.name)
-            .where("id = :id", { id: ctx.params.id })
+            .where(id+" = :"+id)
+            .setParameter(id, ctx.params[id])
             .getOne()
-        if (!record) { ctx.status = 404; return; }
+        if (!record) {throw new Exception(404, "No such "+id)}
         ctx.body = record
     };
     
-export const Update = (target: Function) =>
+export const Update = (target: Function, id: string="id") =>
     async (ctx: Context) => {
         const conn = await getConnection();
         const record = await conn
@@ -43,17 +45,19 @@ export const Update = (target: Function) =>
             .createQueryBuilder(target.name)
             .update()
             .set(ctx.request.body)
-            .where("id = :id", { id: ctx.params.id })
+            .where(id+" = :"+id)
+            .setParameter(id, ctx.params[id])
             .execute()
     };
     
-export const Delete = (target: Function) =>
+export const Delete = (target: Function, id: string="id") =>
     async (ctx: Context) => {
         const conn = await getConnection();
         const record = await conn
             .getRepository(target.name)
             .createQueryBuilder(target.name)
-            .where("id = :id", { id: ctx.params.id })
+            .where(id+" = :"+id)
+            .setParameter(id, ctx.params[id])
             .delete()
             .execute()
     };
