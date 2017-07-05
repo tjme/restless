@@ -1,6 +1,6 @@
 {
   "name": "restless",
-  "version": "0.2.4",
+  "version": "0.2.5",
   "description": "REST, but with LESS work! Create a REST API and SQL relational database, simply by declaring it (using TypeScript decorators)",
   "license": "MIT",
   "readmeFilename": "README.md",
@@ -34,18 +34,19 @@
     "@types/koa": "^2.0.39",
     "@types/koa-bodyparser": "^3.0.23",
     "@types/koa-router": "^7.0.21",
+    "@types/koa-static": "^3.0.0",
     "@types/node": "^7.0.27",
     "typescript": "^2.4.1"
   },
   "dependencies": {
     "body-parser": "^1.17.1",
-    "cerialize": "^0.1.15",
     "jsonwebtoken": "^7.4.1",
     "koa": "^2.2.0",
     "koa-bodyparser": "^4.2.0",
     "koa-passport": "^3.0.0",
     "koa-router": "^7.0.1",
     "koa-session": "^5.1.0",
+    "koa-static": "^4.0.0",
     "mssql": "^4.0.0",
     "reflect-metadata": "^0.1.9",
     "typeorm": "^0.1.0-alpha.24"

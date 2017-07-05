@@ -1,7 +1,7 @@
 Restless
-<sup>[![Version Badge](http://versionbadg.es//tjme/restless.svg)](https://npmjs.org/tjme/restless)</sup>
+<sup>[![Version Badge](http://versionbadg.es/tjme/restless.svg)](https://github.com/tjme/restless)</sup>
 ========
-[![MIT license](http://img.shields.io/badge/license-MIT-lightgrey.svg)](http://opensource.org/licenses/MIT)
+<!--[![MIT license](http://img.shields.io/badge/license-MIT-lightgrey.svg)](http://opensource.org/licenses/MIT)-->
 
 Restless automates the provision of a RESTful back-end/server, and relational database.
 
@@ -25,7 +25,7 @@ It is implemented using [TypeScript](https://www.typescriptlang.org/), [TypeORM]
 7. use curl, Postman or other tools to send HTTP requests to test your REST API (e.g. PUT to the above address, with a JSON body, such as `{"email":"user@test.com"}`)
 
 # Configuration options
-You can simply add or replace the entities (the TypeScript definition files in Src/entity) with your own, and rerun the server. In addtion to providing the new APIs for your entities, the Database (changes) will also be made for you automatically (by TypeORM).
+You can simply add or replace the entities (the TypeScript definition files in /models) with your own, and rerun the server. In addtion to providing the new APIs for your entities, the Database (changes) can also be made for you automatically (by TypeORM).
 
 You annotate each entity for which you want a REST API with `@Rest()`. For a standard interface, no other code (change) is needed.
 
