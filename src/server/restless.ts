@@ -2,6 +2,7 @@ import {Context} from "koa";
 import * as Router from "koa-router";
 import {SignIn, SignUp, SecuredRoutes} from "./authMiddleware";
 import {Create, FindAll, FindOne, Update, Delete} from "./entityMiddleware";
+import {privilegeType} from "../models/User";
 
 export const router = new Router();
 
@@ -14,11 +15,6 @@ export const enum apiType {
     Custom =        1 << 5,
     CRUD = Create | FindAll | FindOne | Update | Delete
 };
-
-export const enum privilegeType {
-    Admin =         1 << 0,
-    Writer =        1 << 1
-}
 
 // router.post("/SignUp", SignUp());
 // router.post("/SignIn", SignIn());

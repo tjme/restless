@@ -20,7 +20,7 @@ createConnection().then(async connection => {
     // app.use(passport.session());
     app.use(router.routes());
     app.use(router.allowedMethods());
-    app.listen(3000);
-    console.log("Restless application is up and running on port 3000");
+    app.listen(process.env.npm_package_config_port);
+    console.log("Restless application is up and running on port "+process.env.npm_package_config_port);
 
 }).catch(error => console.log("TypeORM connection error: ", error));

@@ -1,8 +1,12 @@
 import {Context} from "koa";
 import {Entity, PrimaryColumn, Column, CreateDateColumn, UpdateDateColumn, ManyToOne, getConnection} from "typeorm";
-import {apiType, privilegeType, Rest} from "../server/restless";
+import {apiType, Rest} from "../server/restless";
 import {Contact} from "./Contact";
-import {Exception} from "../models/exception";
+
+export const enum privilegeType {
+    Admin =         1 << 0,
+    Writer =        1 << 1
+}
 
 @Rest()
 @Rest({prefix: "/user/email", id: "email"})

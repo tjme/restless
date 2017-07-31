@@ -1,6 +1,6 @@
 {
   "name": "restless",
-  "version": "0.2.5",
+  "version": "0.2.6",
   "description": "REST, but with LESS work! Create a REST API and SQL relational database, simply by declaring it (using TypeScript decorators)",
   "license": "MIT",
   "readmeFilename": "README.md",
@@ -49,9 +49,15 @@
     "koa-static": "^4.0.0",
     "mssql": "^4.0.0",
     "reflect-metadata": "^0.1.9",
-    "typeorm": "^0.1.0-alpha.24"
+    "typeorm": "^0.1.0-alpha.33"
+  },
+  "engines": {
+    "npm": "^7.0.0"
   },
   "scripts": {
     "start": "tsc && node dist/server/index.js"
+  },
+  "config": {
+    "port": "3000"
   }
 }
