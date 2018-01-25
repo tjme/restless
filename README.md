@@ -1,5 +1,4 @@
 # Restless <sup>[![Version Badge](http://versionbadg.es/tjme/restless.svg)](https://github.com/tjme/restless)</sup>
-<!--[![MIT license](http://img.shields.io/badge/license-MIT-lightgrey.svg)](http://opensource.org/licenses/MIT)-->
 
 Restless automates the provision of a RESTful back-end/server, and relational database.
 
